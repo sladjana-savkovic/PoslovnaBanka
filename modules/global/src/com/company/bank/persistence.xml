@@ -2,5 +2,15 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="PoslovnaBanka" transaction-type="RESOURCE_LOCAL">
 
+        <class>com.company.bank.entity.Mesto</class>
+        <class>com.company.bank.entity.SifarnikDelatnosti</class>
+        <class>com.company.bank.entity.Klijent</class>
+        <class>com.company.bank.entity.Sluzbenik</class>
+        <class>com.company.bank.entity.Racun</class>
+        <class>com.company.bank.entity.GasenjeRacuna</class>
+        <class>com.company.bank.entity.DnevnoStanje</class>
+        <class>com.company.bank.entity.Banka</class>
+        <class>com.company.bank.entity.Poruka</class>
+        <class>com.company.bank.entity.Nalog</class>
     </persistence-unit>
 </persistence>
