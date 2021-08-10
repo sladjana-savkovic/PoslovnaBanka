@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://klijentEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.bank.web.screens.klijent">
+    <data>
+        <instance id="klijentDc"
+                  class="com.company.bank.entity.Klijent">
+            <view extends="_local">
+                <property name="mesto" view="_minimal"/>
+                <property name="delatnost" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="klijentDc">
+                <column width="350px">
+                    <textField id="imeField" property="ime"/>
+                    <textField id="prezimeField" property="prezime"/>
+                    <textField id="jmbgField" property="jmbg"/>
+                    <pickerField id="mestoField" property="mesto">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <textField id="adresaField" property="adresa"/>
+                    <textField id="telefonField" property="telefon"/>
+                    <textField id="emailField" property="email"/>
+                    <textField id="pibField" property="pib"/>
+                    <textField id="mibField" property="mib"/>
+                    <textField id="nazivNadleznogOrganaField" property="nazivNadleznogOrgana"/>
+                    <lookupField id="vrstaKlijentaField" property="vrstaKlijenta"/>
+                    <pickerField id="delatnostField" property="delatnost">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

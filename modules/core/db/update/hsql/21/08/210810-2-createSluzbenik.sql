@@ -1,0 +1,3 @@
+alter table BANK_SLUZBENIK add constraint FK_BANK_SLUZBENIK_ON_BANKA foreign key (BANKA_ID) references BANK_BANKA(ID);
+create unique index IDX_BANK_SLUZBENIK_UNIQ_JMBG on BANK_SLUZBENIK (JMBG);
+create index IDX_BANK_SLUZBENIK_ON_BANKA on BANK_SLUZBENIK (BANKA_ID);

@@ -1,0 +1,32 @@
+create table BANK_NALOG (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    DUZNIK varchar(255),
+    SVRHA_PLACANJA varchar(255),
+    POVERILAC varchar(255),
+    SIFRA_PLACANJA varchar(3),
+    SIFRA_VALUTE varchar(3),
+    IZNOS double precision not null,
+    RACUN_DUZNIKA varchar(18),
+    MODEL_ZADUZENJE varchar(2),
+    POZIV_NA_BROJ_ZADUZENJE varchar(20),
+    RACUN_POVERIOCA varchar(18),
+    MODEL_ODOBRENJE varchar(2),
+    POZIV_NA_BROJ_ODOBRENJE varchar(20),
+    DATUM_PLACANJA timestamp not null,
+    HITNO boolean,
+    VRSTA_NALOGA integer not null,
+    STATUS_NALOGA integer,
+    DATUM_VALUTE timestamp,
+    DNEVNO_STANJE_ID varchar(36),
+    PORUKA_ID varchar(36),
+    --
+    primary key (ID)
+);

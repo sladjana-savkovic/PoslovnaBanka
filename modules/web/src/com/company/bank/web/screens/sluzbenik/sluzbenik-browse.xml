@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://sluzbenikBrowse.caption"
+        focusComponent="sluzbeniksTable"
+        messagesPack="com.company.bank.web.screens.sluzbenik">
+    <data readOnly="true">
+        <collection id="sluzbeniksDc"
+                    class="com.company.bank.entity.Sluzbenik">
+            <view extends="_local">
+                <property name="banka" view="_minimal"/>
+            </view>
+            <loader id="sluzbeniksDl">
+                <query>
+                    <![CDATA[select e from bank_Sluzbenik e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="sluzbeniksTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="sluzbeniksTable"
+                dataLoader="sluzbeniksDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="sluzbeniksTable"
+                    width="100%"
+                    dataContainer="sluzbeniksDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="ime"/>
+                <column id="prezime"/>
+                <column id="jmbg"/>
+                <column id="telefon"/>
+                <column id="email"/>
+                <column id="banka"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="sluzbeniksTable.create"/>
+                <button id="editBtn" action="sluzbeniksTable.edit"/>
+                <button id="removeBtn" action="sluzbeniksTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

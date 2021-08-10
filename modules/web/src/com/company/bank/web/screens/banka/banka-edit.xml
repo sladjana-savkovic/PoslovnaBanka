@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://bankaEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.bank.web.screens.banka">
+    <data>
+        <instance id="bankaDc"
+                  class="com.company.bank.entity.Banka">
+            <view extends="_local">
+                <property name="mesto" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="bankaDc">
+            <column width="350px">
+                <textField id="sifraBankeField" property="sifraBanke"/>
+                <textField id="nazivBankeField" property="nazivBanke"/>
+                <textField id="swiftKodField" property="swiftKod"/>
+                <textField id="obracunskiRacunField" property="obracunskiRacun"/>
+                <pickerField id="mestoField" property="mesto">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="adresaField" property="adresa"/>
+                <textField id="telefonField" property="telefon"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

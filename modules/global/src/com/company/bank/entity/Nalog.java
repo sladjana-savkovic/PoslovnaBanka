@@ -11,6 +11,10 @@ import java.time.LocalDateTime;
 public class Nalog extends StandardEntity {
     private static final long serialVersionUID = 4273708743362616260L;
 
+    @NotNull(message = "Vrsta naloga je obavezna!")
+    @Column(name = "VRSTA_NALOGA", nullable = false)
+    private Integer vrstaNaloga;
+
     @Column(name = "DUZNIK")
     private String duznik;
 
@@ -26,7 +30,7 @@ public class Nalog extends StandardEntity {
     @Column(name = "SIFRA_VALUTE", length = 3)
     private String sifraValute;
 
-    @NotNull
+    @NotNull(message = "Iznos je obavezan!")
     @Column(name = "IZNOS", nullable = false)
     private Double iznos;
 
@@ -55,10 +59,6 @@ public class Nalog extends StandardEntity {
     @Column(name = "HITNO")
     private Boolean hitno;
 
-    @NotNull
-    @Column(name = "VRSTA_NALOGA", nullable = false)
-    private Integer vrstaNaloga;
-
     @Column(name = "STATUS_NALOGA")
     private Integer statusNaloga;
 
@@ -68,6 +68,18 @@ public class Nalog extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DNEVNO_STANJE_ID")
     private DnevnoStanje dnevnoStanje;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PORUKA_ID")
+    private Poruka poruka;
+
+    public Poruka getPoruka() {
+        return poruka;
+    }
+
+    public void setPoruka(Poruka poruka) {
+        this.poruka = poruka;
+    }
 
     public DnevnoStanje getDnevnoStanje() {
         return dnevnoStanje;

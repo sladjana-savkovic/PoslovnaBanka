@@ -1,29 +1,35 @@
 package com.company.bank.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "BANK_BANKA")
 @Entity(name = "bank_Banka")
+@NamePattern("%s|nazivBanke")
 public class Banka extends StandardEntity {
     private static final long serialVersionUID = 6433856846086219235L;
 
     @Column(name = "SIFRA_BANKE", nullable = false, unique = true, length = 3)
-    @NotNull
+    @NotNull(message = "Sifra banke je obavezna!")
+    @Length(message = "Sifra banke mora imati 3 karaktera!", min = 3, max = 3)
     private String sifraBanke;
 
-    @NotNull
+    @NotNull(message = "Naziv banke je obavezan!")
     @Column(name = "NAZIV_BANKE", nullable = false)
     private String nazivBanke;
 
-    @NotNull
+    @NotNull(message = "Swift kod je obavezan!")
     @Column(name = "SWIFT_KOD", nullable = false, unique = true, length = 8)
+    @Length(message = "Swift kod mora imati 8 karaktera!", min = 8, max = 8)
     private String swiftKod;
 
-    @NotNull
+    @NotNull(message = "Obracunski racun je obavezan!")
     @Column(name = "OBRACUNSKI_RACUN", nullable = false, unique = true, length = 18)
+    @Length(message = "Obracunski racun mora imati 18 karaktera!", min = 18, max = 18)
     private String obracunskiRacun;
 
     @ManyToOne(fetch = FetchType.LAZY)

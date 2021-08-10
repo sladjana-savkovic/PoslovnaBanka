@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://klijentBrowse.caption"
+        focusComponent="klijentsTable"
+        messagesPack="com.company.bank.web.screens.klijent">
+    <data readOnly="true">
+        <collection id="klijentsDc"
+                    class="com.company.bank.entity.Klijent">
+            <view extends="_local">
+                <property name="mesto" view="_minimal"/>
+                <property name="delatnost" view="_minimal"/>
+            </view>
+            <loader id="klijentsDl">
+                <query>
+                    <![CDATA[select e from bank_Klijent e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="klijentsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="klijentsTable"
+                dataLoader="klijentsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="klijentsTable"
+                    width="100%"
+                    dataContainer="klijentsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="ime"/>
+                <column id="prezime"/>
+                <column id="jmbg"/>
+                <column id="mesto"/>
+                <column id="adresa"/>
+                <column id="telefon"/>
+                <column id="email"/>
+                <column id="pib"/>
+                <column id="mib"/>
+                <column id="nazivNadleznogOrgana"/>
+                <column id="vrstaKlijenta"/>
+                <column id="delatnost"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="klijentsTable.create"/>
+                <button id="editBtn" action="klijentsTable.edit"/>
+                <button id="removeBtn" action="klijentsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

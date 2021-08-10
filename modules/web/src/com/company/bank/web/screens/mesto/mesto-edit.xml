@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://mestoEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.bank.web.screens.mesto">
+    <data>
+        <instance id="mestoDc"
+                  class="com.company.bank.entity.Mesto">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="mestoDc">
+            <column width="350px">
+                <textField id="nazivMestaField" property="nazivMesta"/>
+                <textField id="postanskiBrojField" property="postanskiBroj"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

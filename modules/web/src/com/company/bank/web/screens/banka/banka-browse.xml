@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://bankaBrowse.caption"
+        focusComponent="bankasTable"
+        messagesPack="com.company.bank.web.screens.banka">
+    <data readOnly="true">
+        <collection id="bankasDc"
+                    class="com.company.bank.entity.Banka">
+            <view extends="_local">
+                <property name="mesto" view="_minimal"/>
+            </view>
+            <loader id="bankasDl">
+                <query>
+                    <![CDATA[select e from bank_Banka e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="bankasTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="bankasTable"
+                dataLoader="bankasDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="bankasTable"
+                    width="100%"
+                    dataContainer="bankasDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="sifraBanke"/>
+                <column id="nazivBanke"/>
+                <column id="swiftKod"/>
+                <column id="obracunskiRacun"/>
+                <column id="mesto"/>
+                <column id="adresa"/>
+                <column id="telefon"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="bankasTable.create"/>
+                <button id="editBtn" action="bankasTable.edit"/>
+                <button id="removeBtn" action="bankasTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

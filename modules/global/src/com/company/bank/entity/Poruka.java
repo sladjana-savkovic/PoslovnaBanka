@@ -4,7 +4,6 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Table(name = "BANK_PORUKA")
 @Entity(name = "bank_Poruka")
@@ -28,18 +27,6 @@ public class Poruka extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "BANKA_DUZNIKA_ID")
     private Banka bankaDuznika;
-
-    @OneToMany(mappedBy = "poruka")
-    @NotNull
-    private List<Nalog> nalozi;
-
-    public List<Nalog> getNalozi() {
-        return nalozi;
-    }
-
-    public void setNalozi(List<Nalog> nalozi) {
-        this.nalozi = nalozi;
-    }
 
     public Banka getBankaDuznika() {
         return bankaDuznika;

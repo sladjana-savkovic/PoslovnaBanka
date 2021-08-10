@@ -1,5 +1,6 @@
 package com.company.bank.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import org.hibernate.validator.constraints.Length;
 
@@ -9,18 +10,19 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "BANK_KLIJENT")
 @Entity(name = "bank_Klijent")
+@NamePattern("%s %s %s|ime,prezime,jmbg")
 public class Klijent extends StandardEntity {
     private static final long serialVersionUID = 2256731550253568336L;
 
-    @NotNull
+    @NotNull(message = "Ime je obavezno!")
     @Column(name = "IME", nullable = false)
     private String ime;
 
-    @NotNull
+    @NotNull(message = "Prezime je obavezno!")
     @Column(name = "PREZIME", nullable = false)
     private String prezime;
 
-    @NotNull
+    @NotNull(message = "JMBG je obavezan!")
     @Column(name = "JMBG", nullable = false, unique = true, length = 13)
     @Length(message = "JMBG mora imati 13 karaktera!", min = 13, max = 13)
     private String jmbg;
@@ -36,19 +38,21 @@ public class Klijent extends StandardEntity {
     private String telefon;
 
     @Column(name = "EMAIL")
-    @Email
+    @Email(message = "Pogresan format emaila!")
     private String email;
 
-    @Column(name = "PIB")
+    @Column(name = "PIB", length = 9)
+    @Length(message = "Pib mora imati 9 karaktera!", min = 9, max = 9)
     private String pib;
 
-    @Column(name = "MIB")
+    @Column(name = "MIB", length = 8)
+    @Length(message = "Mib mora imati 8 karaktera!", min = 8, max = 8)
     private String mib;
 
     @Column(name = "NAZIV_NADLEZNOG_ORGANA")
     private String nazivNadleznogOrgana;
 
-    @NotNull
+    @NotNull(message = "Vrsta klijenta je obavezna!")
     @Column(name = "VRSTA_KLIJENTA", nullable = false)
     private Integer vrstaKlijenta;
 
