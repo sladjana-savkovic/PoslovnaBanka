@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://dnevnoStanjeBrowse.caption"
+        focusComponent="dnevnoStanjesTable"
+        messagesPack="com.company.bank.web.screens.dnevnostanje">
+    <data readOnly="true">
+        <collection id="dnevnoStanjesDc"
+                    class="com.company.bank.entity.DnevnoStanje">
+            <view extends="_local">
+                <property name="racun" view="_minimal"/>
+            </view>
+            <loader id="dnevnoStanjesDl">
+                <query>
+                    <![CDATA[select e from bank_DnevnoStanje e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="dnevnoStanjesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="dnevnoStanjesTable"
+                dataLoader="dnevnoStanjesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="dnevnoStanjesTable"
+                    width="100%"
+                    dataContainer="dnevnoStanjesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="racun"/>
+                <column id="datumPrometa"/>
+                <column id="prethodnoStanje"/>
+                <column id="prometNaTeret"/>
+                <column id="prometUKorist" caption="Promet u korist"/>
+                <column id="novoStanje"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="dnevnoStanjesTable.create"/>
+                <button id="editBtn" action="dnevnoStanjesTable.edit"/>
+                <button id="removeBtn" action="dnevnoStanjesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

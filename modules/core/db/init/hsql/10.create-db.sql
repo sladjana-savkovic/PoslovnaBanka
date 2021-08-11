@@ -28,12 +28,12 @@ create table BANK_DNEVNO_STANJE (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    RACUN_ID varchar(36) not null,
-    DATUM_PROMETA timestamp not null,
-    PRETHODNO_STANJE double precision not null,
-    PROMET_NA_TERET double precision not null,
-    PROMET_U_KORIST double precision not null,
-    NOVO_STANJE double precision not null,
+    RACUN_ID varchar(36),
+    DATUM_PROMETA timestamp,
+    PRETHODNO_STANJE double precision,
+    PROMET_NA_TERET double precision,
+    PROMET_U_KORIST double precision,
+    NOVO_STANJE double precision,
     --
     primary key (ID)
 )^

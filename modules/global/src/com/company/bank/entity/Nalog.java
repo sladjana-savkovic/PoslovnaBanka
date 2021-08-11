@@ -19,15 +19,18 @@ public class Nalog extends StandardEntity {
     private String duznik;
 
     @Column(name = "SVRHA_PLACANJA")
+    @NotNull(message = "Svrha placanja je obavezna!")
     private String svrhaPlacanja;
 
     @Column(name = "POVERILAC")
     private String poverilac;
 
     @Column(name = "SIFRA_PLACANJA", length = 3)
+    @NotNull(message = "Sifra placanja je obavezna!")
     private String sifraPlacanja;
 
     @Column(name = "SIFRA_VALUTE", length = 3)
+    @NotNull(message = "Sifra valute je obavezna!")
     private String sifraValute;
 
     @NotNull(message = "Iznos je obavezan!")

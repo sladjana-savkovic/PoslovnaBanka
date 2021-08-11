@@ -1,39 +1,34 @@
 package com.company.bank.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Table(name = "BANK_DNEVNO_STANJE")
 @Entity(name = "bank_DnevnoStanje")
+@NamePattern("%s %s|racun,datumPrometa")
 public class DnevnoStanje extends StandardEntity {
     private static final long serialVersionUID = 8523548169200228983L;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RACUN_ID")
     private Racun racun;
 
-    @NotNull
-    @Column(name = "DATUM_PROMETA", nullable = false)
+    @Column(name = "DATUM_PROMETA")
     private LocalDateTime datumPrometa;
 
-    @Column(name = "PRETHODNO_STANJE", nullable = false)
-    @NotNull
+    @Column(name = "PRETHODNO_STANJE")
     private Double prethodnoStanje;
 
-    @NotNull
-    @Column(name = "PROMET_NA_TERET", nullable = false)
+    @Column(name = "PROMET_NA_TERET")
     private Double prometNaTeret;
 
-    @NotNull
-    @Column(name = "PROMET_U_KORIST", nullable = false)
+    @Column(name = "PROMET_U_KORIST")
     private Double prometUKorist;
 
-    @NotNull
-    @Column(name = "NOVO_STANJE", nullable = false)
+    @Column(name = "NOVO_STANJE")
     private Double novoStanje;
 
     public Racun getRacun() {

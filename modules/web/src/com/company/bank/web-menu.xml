@@ -9,5 +9,6 @@
         <item screen="bank_Racun.browse" caption="mainMsg://menu_config.bank_Racun.browse"/>
         <item screen="bank_GasenjeRacuna.browse" caption="mainMsg://menu_config.bank_GasenjeRacuna.browse"/>
         <item screen="bank_Nalog.browse" caption="mainMsg://menu_config.bank_Nalog.browse"/>
+        <item screen="bank_DnevnoStanje.browse" caption="mainMsg://menu_config.bank_DnevnoStanje.browse"/>
     </menu>
 </menu-config>

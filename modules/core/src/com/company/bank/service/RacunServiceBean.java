@@ -3,11 +3,7 @@ package com.company.bank.service;
 import com.company.bank.entity.Banka;
 import com.company.bank.entity.Racun;
 import com.haulmont.cuba.core.global.DataManager;
-import org.apache.commons.math3.random.RandomDataGenerator;
-import org.apache.commons.math3.random.RandomGenerator;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
-
 import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -31,7 +27,19 @@ public class RacunServiceBean implements RacunService {
         racun.setAktivnost(true);
         racun.setDatumOtvaranja(LocalDateTime.now());
         racun.setBrojRacuna(brojRacuna);
-        
+
         dataManager.commit(racun);
     }
+
+    @Override
+    public boolean provjeriIspravnostRacuna(String brojRacuna) {
+        try {
+            Racun racun = dataManager.loadValue("select r from bank_Racun r where " +
+                    "r.brojRacuna = :brojRacuna ", Racun.class).parameter("brojRacuna", brojRacuna).one();
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
 }

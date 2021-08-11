@@ -1,7 +1,6 @@
 package com.company.bank.service;
 
-import com.company.bank.entity.Nalog;
-import com.company.bank.entity.StatusNaloga;
+import com.company.bank.entity.*;
 import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class NalogServiceBean implements NalogService {
     private DataManager dataManager;
 
     @Override
-    public void kreirajNalog(Nalog nalog) {
+    public void kreirajNalog(Nalog nalog) throws Exception {
         nalog.setDatumValute(LocalDate.now());
         nalog.setStatusNaloga(StatusNaloga.KREIRAN);
         nalog.setHitno(false);

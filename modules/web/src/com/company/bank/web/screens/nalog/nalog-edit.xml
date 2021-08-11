@@ -34,7 +34,7 @@
             </form>
         </scrollBox>
         <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="commitBtn" caption="Create" stylename="primary"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>
     </layout>
