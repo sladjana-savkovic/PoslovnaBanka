@@ -146,10 +146,10 @@ create table BANK_NALOG (
     RACUN_POVERIOCA varchar(18),
     MODEL_ODOBRENJE varchar(2),
     POZIV_NA_BROJ_ODOBRENJE varchar(20),
-    DATUM_PLACANJA date not null,
+    DATUM_PLACANJA timestamp not null,
     HITNO boolean,
     STATUS_NALOGA integer,
-    DATUM_VALUTE date,
+    DATUM_VALUTE timestamp,
     DNEVNO_STANJE_ID varchar(36),
     PORUKA_ID varchar(36),
     --

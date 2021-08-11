@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class DnevnoStanje extends StandardEntity {
     private static final long serialVersionUID = 8523548169200228983L;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "RACUN_ID")
     private Racun racun;
 
@@ -30,6 +30,14 @@ public class DnevnoStanje extends StandardEntity {
 
     @Column(name = "NOVO_STANJE")
     private Double novoStanje;
+
+    public void setDatumPrometa(LocalDateTime datumPrometa) {
+        this.datumPrometa = datumPrometa;
+    }
+
+    public LocalDateTime getDatumPrometa() {
+        return datumPrometa;
+    }
 
     public Racun getRacun() {
         return racun;
@@ -71,11 +79,4 @@ public class DnevnoStanje extends StandardEntity {
         this.prethodnoStanje = prethodnoStanje;
     }
 
-    public LocalDateTime getDatumPrometa() {
-        return datumPrometa;
-    }
-
-    public void setDatumPrometa(LocalDateTime datumPrometa) {
-        this.datumPrometa = datumPrometa;
-    }
 }

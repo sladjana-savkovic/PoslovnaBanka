@@ -4,7 +4,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Table(name = "BANK_NALOG")
 @Entity(name = "bank_Nalog")
@@ -57,7 +57,7 @@ public class Nalog extends StandardEntity {
 
     @Column(name = "DATUM_PLACANJA", nullable = false)
     @NotNull
-    private LocalDate datumPlacanja;
+    private LocalDateTime datumPlacanja;
 
     @Column(name = "HITNO")
     private Boolean hitno;
@@ -66,7 +66,7 @@ public class Nalog extends StandardEntity {
     private Integer statusNaloga;
 
     @Column(name = "DATUM_VALUTE")
-    private LocalDate datumValute;
+    private LocalDateTime datumValute;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DNEVNO_STANJE_ID")
@@ -76,19 +76,19 @@ public class Nalog extends StandardEntity {
     @JoinColumn(name = "PORUKA_ID")
     private Poruka poruka;
 
-    public void setDatumPlacanja(LocalDate datumPlacanja) {
+    public void setDatumPlacanja(LocalDateTime datumPlacanja) {
         this.datumPlacanja = datumPlacanja;
     }
 
-    public LocalDate getDatumPlacanja() {
+    public LocalDateTime getDatumPlacanja() {
         return datumPlacanja;
     }
 
-    public void setDatumValute(LocalDate datumValute) {
+    public void setDatumValute(LocalDateTime datumValute) {
         this.datumValute = datumValute;
     }
 
-    public LocalDate getDatumValute() {
+    public LocalDateTime getDatumValute() {
         return datumValute;
     }
 

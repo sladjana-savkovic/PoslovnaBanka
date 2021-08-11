@@ -7,4 +7,5 @@ public interface RacunService {
 
     void kreirajRacun(Racun racun);
     boolean provjeriIspravnostRacuna(String brojRacuna);
+    boolean provjeriAktivnostRacuna(String brojRacuna);
 }

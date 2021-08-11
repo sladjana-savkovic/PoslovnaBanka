@@ -42,4 +42,11 @@ public class RacunServiceBean implements RacunService {
         return true;
     }
 
+    @Override
+    public boolean provjeriAktivnostRacuna(String brojRacuna) {
+        Racun racun = dataManager.loadValue("select r from bank_Racun r where " +
+                "r.brojRacuna = :brojRacuna ", Racun.class).parameter("brojRacuna", brojRacuna).one();
+        return racun.getAktivnost();
+    }
+
 }
