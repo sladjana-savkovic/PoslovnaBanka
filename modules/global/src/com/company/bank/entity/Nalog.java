@@ -4,7 +4,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Table(name = "BANK_NALOG")
 @Entity(name = "bank_Nalog")
@@ -52,9 +52,9 @@ public class Nalog extends StandardEntity {
     @Column(name = "POZIV_NA_BROJ_ODOBRENJE", length = 20)
     private String pozivNaBrojOdobrenje;
 
-    @NotNull
     @Column(name = "DATUM_PLACANJA", nullable = false)
-    private LocalDateTime datumPlacanja;
+    @NotNull
+    private LocalDate datumPlacanja;
 
     @Column(name = "HITNO")
     private Boolean hitno;
@@ -63,7 +63,7 @@ public class Nalog extends StandardEntity {
     private Integer statusNaloga;
 
     @Column(name = "DATUM_VALUTE")
-    private LocalDateTime datumValute;
+    private LocalDate datumValute;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DNEVNO_STANJE_ID")
@@ -72,6 +72,22 @@ public class Nalog extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PORUKA_ID")
     private Poruka poruka;
+
+    public void setDatumPlacanja(LocalDate datumPlacanja) {
+        this.datumPlacanja = datumPlacanja;
+    }
+
+    public LocalDate getDatumPlacanja() {
+        return datumPlacanja;
+    }
+
+    public void setDatumValute(LocalDate datumValute) {
+        this.datumValute = datumValute;
+    }
+
+    public LocalDate getDatumValute() {
+        return datumValute;
+    }
 
     public Poruka getPoruka() {
         return poruka;
@@ -87,14 +103,6 @@ public class Nalog extends StandardEntity {
 
     public void setDnevnoStanje(DnevnoStanje dnevnoStanje) {
         this.dnevnoStanje = dnevnoStanje;
-    }
-
-    public LocalDateTime getDatumValute() {
-        return datumValute;
-    }
-
-    public void setDatumValute(LocalDateTime datumValute) {
-        this.datumValute = datumValute;
     }
 
     public String getSifraValute() {
@@ -127,14 +135,6 @@ public class Nalog extends StandardEntity {
 
     public void setVrstaNaloga(VrstaNaloga vrstaNaloga) {
         this.vrstaNaloga = vrstaNaloga == null ? null : vrstaNaloga.getId();
-    }
-
-    public LocalDateTime getDatumPlacanja() {
-        return datumPlacanja;
-    }
-
-    public void setDatumPlacanja(LocalDateTime datumPlacanja) {
-        this.datumPlacanja = datumPlacanja;
     }
 
     public String getPozivNaBrojOdobrenje() {

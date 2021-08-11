@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 public class Racun extends StandardEntity {
     private static final long serialVersionUID = 1557072343427410181L;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BANKA_ID")
     private Banka banka;
 
@@ -43,9 +42,6 @@ public class Racun extends StandardEntity {
     @Column(name = "VRSTA_RACUNA", nullable = false)
     private Integer vrstaRacuna;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "racunZaGasenje")
-    private GasenjeRacuna gasenjeRacuna;
-
     public Boolean getAktivnost() {
         return aktivnost;
     }
@@ -68,14 +64,6 @@ public class Racun extends StandardEntity {
 
     public void setBrojRacuna(String brojRacuna) {
         this.brojRacuna = brojRacuna;
-    }
-
-    public GasenjeRacuna getGasenjeRacuna() {
-        return gasenjeRacuna;
-    }
-
-    public void setGasenjeRacuna(GasenjeRacuna gasenjeRacuna) {
-        this.gasenjeRacuna = gasenjeRacuna;
     }
 
     public Klijent getKlijent() {

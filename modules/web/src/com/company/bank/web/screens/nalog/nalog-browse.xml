@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://nalogBrowse.caption"
+        focusComponent="nalogsTable"
+        messagesPack="com.company.bank.web.screens.nalog">
+    <data readOnly="true">
+        <collection id="nalogsDc"
+                    class="com.company.bank.entity.Nalog">
+            <view extends="_local"/>
+            <loader id="nalogsDl">
+                <query>
+                    <![CDATA[select e from bank_Nalog e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="nalogsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="nalogsTable"
+                dataLoader="nalogsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="nalogsTable"
+                    width="100%"
+                    dataContainer="nalogsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="vrstaNaloga"/>
+                <column id="duznik"/>
+                <column id="svrhaPlacanja"/>
+                <column id="poverilac"/>
+                <column id="sifraPlacanja"/>
+                <column id="sifraValute"/>
+                <column id="iznos"/>
+                <column id="racunDuznika"/>
+                <column id="modelZaduzenje"/>
+                <column id="pozivNaBrojZaduzenje"/>
+                <column id="racunPoverioca"/>
+                <column id="modelOdobrenje"/>
+                <column id="pozivNaBrojOdobrenje"/>
+                <column id="datumPlacanja"/>
+                <column id="hitno"/>
+                <column id="statusNaloga"/>
+                <column id="datumValute"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="nalogsTable.create"/>
+                <button id="editBtn" action="nalogsTable.edit"/>
+                <button id="removeBtn" action="nalogsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

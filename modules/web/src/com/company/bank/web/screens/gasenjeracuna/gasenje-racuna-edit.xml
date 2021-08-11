@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://racunEdit.caption"
+        caption="msg://gasenjeRacunaEdit.caption"
         focusComponent="form"
-        messagesPack="com.company.bank.web.screens.racun">
+        messagesPack="com.company.bank.web.screens.gasenjeracuna">
     <data>
-        <instance id="racunDc"
-                  class="com.company.bank.entity.Racun">
+        <instance id="gasenjeRacunaDc"
+                  class="com.company.bank.entity.GasenjeRacuna">
             <view extends="_local">
-                <property name="banka" view="_minimal"/>
-                <property name="klijent" view="_minimal"/>
+                <property name="racunZaGasenje" view="_minimal"/>
             </view>
             <loader/>
         </instance>
@@ -16,17 +15,16 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="racunDc">
+        <form id="form" dataContainer="gasenjeRacunaDc">
             <column width="350px">
-                <pickerField id="klijentField" property="klijent">
+                <pickerField id="racunZaGasenjeField" property="racunZaGasenje">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </pickerField>
-                <lookupField id="tipRacunaField" property="tipRacuna"/>
-                <textField id="namenaRacunaField" property="namenaRacuna"/>
-                <lookupField id="vrstaRacunaField" property="vrstaRacuna"/>
+                <textField id="razlogGasenjaField" property="razlogGasenja"/>
+                <textField id="racunZaPrenosField" property="racunZaPrenos"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

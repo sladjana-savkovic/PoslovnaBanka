@@ -7,5 +7,7 @@
         <item screen="bank_Banka.browse" caption="mainMsg://menu_config.bank_Banka.browse"/>
         <item screen="bank_Klijent.browse" caption="mainMsg://menu_config.bank_Klijent.browse"/>
         <item screen="bank_Racun.browse" caption="mainMsg://menu_config.bank_Racun.browse"/>
+        <item screen="bank_GasenjeRacuna.browse" caption="mainMsg://menu_config.bank_GasenjeRacuna.browse"/>
+        <item screen="bank_Nalog.browse" caption="mainMsg://menu_config.bank_Nalog.browse"/>
     </menu>
 </menu-config>

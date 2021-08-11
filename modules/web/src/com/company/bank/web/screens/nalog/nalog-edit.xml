@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://nalogEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.bank.web.screens.nalog">
+    <data>
+        <instance id="nalogDc"
+                  class="com.company.bank.entity.Nalog">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="nalogDc">
+                <column width="350px">
+                    <lookupField id="vrstaNalogaField" property="vrstaNaloga"/>
+                    <textField id="duznikField" property="duznik"/>
+                    <textField id="svrhaPlacanjaField" property="svrhaPlacanja"/>
+                    <textField id="poverilacField" property="poverilac"/>
+                    <textField id="sifraPlacanjaField" property="sifraPlacanja"/>
+                    <textField id="sifraValuteField" property="sifraValute"/>
+                    <textField id="iznosField" property="iznos"/>
+                    <textField id="racunDuznikaField" property="racunDuznika"/>
+                    <textField id="modelZaduzenjeField" property="modelZaduzenje"/>
+                    <textField id="pozivNaBrojZaduzenjeField" property="pozivNaBrojZaduzenje"/>
+                    <textField id="racunPoveriocaField" property="racunPoverioca"/>
+                    <textField id="modelOdobrenjeField" property="modelOdobrenje"/>
+                    <textField id="pozivNaBrojOdobrenjeField" property="pozivNaBrojOdobrenje"/>
+                    <dateField id="datumPlacanjaField" property="datumPlacanja"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -10,6 +10,7 @@ create table BANK_GASENJE_RACUNA (
     DELETED_BY varchar(50),
     --
     RACUN_ZA_GASENJE_ID varchar(36) not null,
+    DATUM_KREIRANJA timestamp,
     RAZLOG_GASENJA varchar(255) not null,
     RACUN_ZA_PRENOS varchar(18) not null,
     --
@@ -120,27 +121,7 @@ create table BANK_KLIJENT (
     primary key (ID)
 )^
 -- end BANK_KLIJENT
--- begin BANK_SLUZBENIK
-create table BANK_SLUZBENIK (
-    ID varchar(36) not null,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    IME varchar(255) not null,
-    PREZIME varchar(255) not null,
-    JMBG varchar(13) not null,
-    TELEFON varchar(255),
-    EMAIL varchar(255) not null,
-    BANKA_ID varchar(36) not null,
-    --
-    primary key (ID)
-)^
--- end BANK_SLUZBENIK
+
 -- begin BANK_NALOG
 create table BANK_NALOG (
     ID varchar(36) not null,
@@ -152,6 +133,7 @@ create table BANK_NALOG (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
+    VRSTA_NALOGA integer not null,
     DUZNIK varchar(255),
     SVRHA_PLACANJA varchar(255),
     POVERILAC varchar(255),
@@ -164,11 +146,10 @@ create table BANK_NALOG (
     RACUN_POVERIOCA varchar(18),
     MODEL_ODOBRENJE varchar(2),
     POZIV_NA_BROJ_ODOBRENJE varchar(20),
-    DATUM_PLACANJA timestamp not null,
+    DATUM_PLACANJA date not null,
     HITNO boolean,
-    VRSTA_NALOGA integer not null,
     STATUS_NALOGA integer,
-    DATUM_VALUTE timestamp,
+    DATUM_VALUTE date,
     DNEVNO_STANJE_ID varchar(36),
     PORUKA_ID varchar(36),
     --
@@ -186,7 +167,7 @@ create table BANK_RACUN (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    BANKA_ID varchar(36) not null,
+    BANKA_ID varchar(36),
     KLIJENT_ID varchar(36) not null,
     BROJ_RACUNA varchar(18),
     DATUM_OTVARANJA timestamp,
@@ -217,3 +198,24 @@ create table BANK_PORUKA (
     primary key (ID)
 )^
 -- end BANK_PORUKA
+-- begin BANK_SLUZBENIK
+create table BANK_SLUZBENIK (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    IME varchar(255) not null,
+    PREZIME varchar(255) not null,
+    JMBG varchar(13) not null,
+    TELEFON varchar(255),
+    EMAIL varchar(255) not null,
+    BANKA_ID varchar(36) not null,
+    --
+    primary key (ID)
+)^
+-- end BANK_SLUZBENIK
