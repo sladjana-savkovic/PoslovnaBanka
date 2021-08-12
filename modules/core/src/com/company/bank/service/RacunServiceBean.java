@@ -34,7 +34,7 @@ public class RacunServiceBean implements RacunService {
     @Override
     public boolean provjeriIspravnostRacuna(String brojRacuna) {
         try {
-            Racun racun = dataManager.loadValue("select r from bank_Racun r where " +
+            dataManager.loadValue("select r from bank_Racun r where " +
                     "r.brojRacuna = :brojRacuna ", Racun.class).parameter("brojRacuna", brojRacuna).one();
         }catch (Exception e){
             return false;

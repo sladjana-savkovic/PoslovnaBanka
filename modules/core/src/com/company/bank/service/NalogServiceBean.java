@@ -5,7 +5,6 @@ import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service(NalogService.NAME)
@@ -27,6 +26,8 @@ public class NalogServiceBean implements NalogService {
 
         if(nalog.getVrstaNaloga() == VrstaNaloga.UPLATA)
             izvrsiUplatu(nalog);
+        else if(nalog.getVrstaNaloga() == VrstaNaloga.ISPLATA)
+            izvrsiIsplatu(nalog);
     }
 
     @Override
@@ -50,6 +51,25 @@ public class NalogServiceBean implements NalogService {
         }
         DnevnoStanje dnevnoStanje = dnevnoStanjeService.kreirajDnevnoStanjePoverica(nalog);
         obradiNalog(nalog, dnevnoStanje);
+    }
+
+    @Override
+    public void izvrsiIsplatu(Nalog nalog) throws Exception {
+        if(!racunService.provjeriAktivnostRacuna(nalog.getRacunDuznika())){
+            odbijNalog(nalog);
+            throw new Exception("Racun duznika je ugasen!");
+        }
+        try{
+            DnevnoStanje poslednjeDnevnoStanje = dnevnoStanjeService.pronadjiPoslednjeDnevnoStanje(nalog.getRacunDuznika());
+            if(poslednjeDnevnoStanje.getNovoStanje() < nalog.getIznos())
+                throw new Exception();
+
+            DnevnoStanje dnevnoStanje = dnevnoStanjeService.kreirajDnevnoStanjeDuznika(nalog, poslednjeDnevnoStanje);
+            obradiNalog(nalog, dnevnoStanje);
+        }catch (Exception e){
+            odbijNalog(nalog);
+            throw new Exception("Duznik nema dovoljno sredstava na racunu!");
+        }
     }
 
 }

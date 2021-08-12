@@ -30,8 +30,6 @@
                     width="100%"
                     dataContainer="dnevnoStanjesDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
@@ -45,8 +43,6 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="dnevnoStanjesTable.create"/>
-                <button id="editBtn" action="dnevnoStanjesTable.edit"/>
                 <button id="removeBtn" action="dnevnoStanjesTable.remove"/>
             </buttonsPanel>
         </groupTable>

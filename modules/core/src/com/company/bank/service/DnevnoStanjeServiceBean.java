@@ -26,18 +26,28 @@ public class DnevnoStanjeServiceBean implements DnevnoStanjeService {
             //Postoji poslednje dnevno stanje
             poslednjeDnevnoStanje = pronadjiPoslednjeDnevnoStanje(nalog.getRacunPoverioca());
 
-            if(poslednjeDnevnoStanje.getDatumPrometa().equals(nalog.getDatumPlacanja()))
-                return promijeniDanasnjeDnevnoStanje(nalog, poslednjeDnevnoStanje);
+            if(poslednjeDnevnoStanje.getDatumPrometa().toLocalDate().equals(nalog.getDatumPlacanja().toLocalDate()))
+                return promijeniDanasnjeDnevnoStanjePoverioca(nalog, poslednjeDnevnoStanje);
             else
-                return kreirajNovoDnevnoStanje(nalog, poslednjeDnevnoStanje, novoDnevnoStanje);
+                return kreirajNovoDnevnoStanjePoverioca(nalog, poslednjeDnevnoStanje, novoDnevnoStanje);
 
         }catch (Exception e){
             //Dnevno stanje se kreira prvi put
             Racun racun = dataManager.loadValue("select r from bank_Racun r where " +
                     "r.brojRacuna = :brojRacuna ", Racun.class).parameter("brojRacuna", nalog.getRacunPoverioca()).one();
 
-            return kreirajPrvoDnevnoStanje(nalog, novoDnevnoStanje, racun);
+            return kreirajPrvoDnevnoStanjePoverioca(nalog, novoDnevnoStanje, racun);
         }
+    }
+
+    @Override
+    public DnevnoStanje kreirajDnevnoStanjeDuznika(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje) {
+        DnevnoStanje novoDnevnoStanje = new DnevnoStanje();
+
+        if(poslednjeDnevnoStanje.getDatumPrometa().toLocalDate().equals(nalog.getDatumPlacanja().toLocalDate())){
+            return promijeniDanasnjeDnevnoStanjeDuznika(nalog, poslednjeDnevnoStanje);
+        }else
+            return kreirajNovoDnevnoStanjeDuznika(nalog, poslednjeDnevnoStanje, novoDnevnoStanje);
     }
 
     @Override
@@ -45,20 +55,11 @@ public class DnevnoStanjeServiceBean implements DnevnoStanjeService {
         List<DnevnoStanje> dnevnaStanja = dataManager.loadValue("select d from bank_DnevnoStanje d where " +
                 "d.racun.brojRacuna = :racunPoverioca order by d.datumPrometa", DnevnoStanje.class)
                 .parameter("racunPoverioca", brojRacuna).list();
-        log.info("velicina liste " + String.valueOf(dnevnaStanja.size()));
         return dnevnaStanja.get(dnevnaStanja.size() - 1);
     }
 
-    private DnevnoStanje promijeniDanasnjeDnevnoStanje(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje) {
-        poslednjeDnevnoStanje.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
-        poslednjeDnevnoStanje.setPrometNaTeret(0.0);
-        poslednjeDnevnoStanje.setPrometUKorist(nalog.getIznos());
-        poslednjeDnevnoStanje.setNovoStanje(poslednjeDnevnoStanje.getPrethodnoStanje() -
-                poslednjeDnevnoStanje.getPrometNaTeret() + poslednjeDnevnoStanje.getPrometUKorist());
-        return poslednjeDnevnoStanje;
-    }
-
-    private DnevnoStanje kreirajNovoDnevnoStanje(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje, DnevnoStanje novoDnevnoStanje) {
+    private DnevnoStanje promijeniDanasnjeDnevnoStanjePoverioca(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje) {
+        DnevnoStanje novoDnevnoStanje = new DnevnoStanje();
         novoDnevnoStanje.setDatumPrometa(nalog.getDatumPlacanja());
         novoDnevnoStanje.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
         novoDnevnoStanje.setPrometNaTeret(0.0);
@@ -66,17 +67,63 @@ public class DnevnoStanjeServiceBean implements DnevnoStanjeService {
         novoDnevnoStanje.setRacun(poslednjeDnevnoStanje.getRacun());
         novoDnevnoStanje.setNovoStanje(novoDnevnoStanje.getPrethodnoStanje() -
                 novoDnevnoStanje.getPrometNaTeret() + novoDnevnoStanje.getPrometUKorist());
+
+        dataManager.remove(poslednjeDnevnoStanje);
+        dataManager.commit(novoDnevnoStanje);
         return novoDnevnoStanje;
     }
 
-    private DnevnoStanje kreirajPrvoDnevnoStanje(Nalog nalog, DnevnoStanje novoDnevnoStanje, Racun racun) {
+    private DnevnoStanje kreirajNovoDnevnoStanjePoverioca(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje, DnevnoStanje novoDnevnoStanje) {
+        novoDnevnoStanje.setDatumPrometa(nalog.getDatumPlacanja());
+        novoDnevnoStanje.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+        novoDnevnoStanje.setPrometNaTeret(0.0);
+        novoDnevnoStanje.setPrometUKorist(nalog.getIznos());
+        novoDnevnoStanje.setRacun(poslednjeDnevnoStanje.getRacun());
+        novoDnevnoStanje.setNovoStanje(novoDnevnoStanje.getPrethodnoStanje() -
+                novoDnevnoStanje.getPrometNaTeret() + novoDnevnoStanje.getPrometUKorist());
+
+        dataManager.commit(novoDnevnoStanje);
+        return novoDnevnoStanje;
+    }
+
+    private DnevnoStanje kreirajPrvoDnevnoStanjePoverioca(Nalog nalog, DnevnoStanje novoDnevnoStanje, Racun racun) {
         novoDnevnoStanje.setDatumPrometa(nalog.getDatumPlacanja());
         novoDnevnoStanje.setPrethodnoStanje(0.0);
         novoDnevnoStanje.setPrometNaTeret(0.0);
         novoDnevnoStanje.setPrometUKorist(nalog.getIznos());
+        novoDnevnoStanje.setRacun(racun);
         novoDnevnoStanje.setNovoStanje(novoDnevnoStanje.getPrethodnoStanje() -
                 novoDnevnoStanje.getPrometNaTeret() + novoDnevnoStanje.getPrometUKorist());
-        novoDnevnoStanje.setRacun(racun);
+
+        dataManager.commit(novoDnevnoStanje);
+        return novoDnevnoStanje;
+    }
+
+    private DnevnoStanje promijeniDanasnjeDnevnoStanjeDuznika(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje) {
+        DnevnoStanje novoDnevnoStanje = new DnevnoStanje();
+        novoDnevnoStanje.setDatumPrometa(nalog.getDatumPlacanja());
+        novoDnevnoStanje.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+        novoDnevnoStanje.setPrometNaTeret(nalog.getIznos());
+        novoDnevnoStanje.setPrometUKorist(0.0);
+        novoDnevnoStanje.setRacun(poslednjeDnevnoStanje.getRacun());
+        novoDnevnoStanje.setNovoStanje(novoDnevnoStanje.getPrethodnoStanje() -
+                novoDnevnoStanje.getPrometNaTeret() + novoDnevnoStanje.getPrometUKorist());
+
+        dataManager.remove(poslednjeDnevnoStanje);
+        dataManager.commit(novoDnevnoStanje);
+        return novoDnevnoStanje;
+    }
+
+    private DnevnoStanje kreirajNovoDnevnoStanjeDuznika(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje, DnevnoStanje novoDnevnoStanje) {
+        novoDnevnoStanje.setDatumPrometa(nalog.getDatumPlacanja());
+        novoDnevnoStanje.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+        novoDnevnoStanje.setPrometNaTeret(nalog.getIznos());
+        novoDnevnoStanje.setPrometUKorist(0.0);
+        novoDnevnoStanje.setRacun(poslednjeDnevnoStanje.getRacun());
+        novoDnevnoStanje.setNovoStanje(novoDnevnoStanje.getPrethodnoStanje() -
+                novoDnevnoStanje.getPrometNaTeret() + novoDnevnoStanje.getPrometUKorist());
+
+        dataManager.commit(novoDnevnoStanje);
         return novoDnevnoStanje;
     }
 }

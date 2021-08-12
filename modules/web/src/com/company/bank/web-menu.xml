@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-bank" insertBefore="administration" caption="mainMsg://menu_config.application-bank">
-        <item screen="bank_Mesto.browse" caption="mainMsg://menu_config.bank_Mesto.browse"/>
-        <item screen="bank_SifarnikDelatnosti.browse" caption="mainMsg://menu_config.bank_SifarnikDelatnosti.browse"/>
-        <item screen="bank_Sluzbenik.browse" caption="mainMsg://menu_config.bank_Sluzbenik.browse"/>
         <item screen="bank_Banka.browse" caption="mainMsg://menu_config.bank_Banka.browse"/>
+        <item screen="bank_Sluzbenik.browse" caption="mainMsg://menu_config.bank_Sluzbenik.browse"/>
         <item screen="bank_Klijent.browse" caption="mainMsg://menu_config.bank_Klijent.browse"/>
         <item screen="bank_Racun.browse" caption="mainMsg://menu_config.bank_Racun.browse"/>
         <item screen="bank_GasenjeRacuna.browse" caption="mainMsg://menu_config.bank_GasenjeRacuna.browse"/>
         <item screen="bank_Nalog.browse" caption="mainMsg://menu_config.bank_Nalog.browse"/>
         <item screen="bank_DnevnoStanje.browse" caption="mainMsg://menu_config.bank_DnevnoStanje.browse"/>
+        <item screen="bank_Mesto.browse" caption="mainMsg://menu_config.bank_Mesto.browse"/>
+        <item screen="bank_SifarnikDelatnosti.browse" caption="mainMsg://menu_config.bank_SifarnikDelatnosti.browse"/>
     </menu>
 </menu-config>

@@ -7,5 +7,6 @@ public interface DnevnoStanjeService {
     String NAME = "bank_DnevnoStanjeService";
 
     DnevnoStanje kreirajDnevnoStanjePoverica(Nalog nalog);
+    DnevnoStanje kreirajDnevnoStanjeDuznika(Nalog nalog, DnevnoStanje poslednjeDnevnoStanje);
     DnevnoStanje pronadjiPoslednjeDnevnoStanje(String brojRacuna);
 }
