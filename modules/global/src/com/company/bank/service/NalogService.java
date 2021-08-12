@@ -11,4 +11,6 @@ public interface NalogService {
     void obradiNalog(Nalog nalog, DnevnoStanje dnevnoStanje);
     void izvrsiUplatu(Nalog nalog) throws Exception;
     void izvrsiIsplatu(Nalog nalog) throws Exception;
+    void izvrsiInterniPrenosIliNaplatu(Nalog nalog) throws Exception;
+    void kreirajNalogZaPoverioca(Nalog nalog, DnevnoStanje dnevnoStanjePoverioca);
 }

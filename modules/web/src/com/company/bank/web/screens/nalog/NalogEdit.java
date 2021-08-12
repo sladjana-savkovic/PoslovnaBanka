@@ -51,6 +51,9 @@ public class NalogEdit extends StandardEditor<Nalog> {
         }
         catch (Exception e){
             notifications.create().withCaption(e.getMessage()).show();
+            screenBuilders.lookup(Nalog.class, this)
+                    .withOpenMode(OpenMode.THIS_TAB)
+                    .show();
         }
     }
 

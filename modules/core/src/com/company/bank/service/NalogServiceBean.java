@@ -28,6 +28,8 @@ public class NalogServiceBean implements NalogService {
             izvrsiUplatu(nalog);
         else if(nalog.getVrstaNaloga() == VrstaNaloga.ISPLATA)
             izvrsiIsplatu(nalog);
+        else
+            izvrsiInterniPrenosIliNaplatu(nalog);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class NalogServiceBean implements NalogService {
     public void izvrsiUplatu(Nalog nalog) throws Exception {
         if(!racunService.provjeriAktivnostRacuna(nalog.getRacunPoverioca())){
             odbijNalog(nalog);
-            throw new Exception("Racun poverioca je ugasen!");
+            throw new Exception("Transakcija odbijena; racun poverioca je ugasen.");
         }
         DnevnoStanje dnevnoStanje = dnevnoStanjeService.kreirajDnevnoStanjePoverica(nalog);
         obradiNalog(nalog, dnevnoStanje);
@@ -57,7 +59,7 @@ public class NalogServiceBean implements NalogService {
     public void izvrsiIsplatu(Nalog nalog) throws Exception {
         if(!racunService.provjeriAktivnostRacuna(nalog.getRacunDuznika())){
             odbijNalog(nalog);
-            throw new Exception("Racun duznika je ugasen!");
+            throw new Exception("Transakcija odbijena; racun duznika je ugasen.");
         }
         try{
             DnevnoStanje poslednjeDnevnoStanje = dnevnoStanjeService.pronadjiPoslednjeDnevnoStanje(nalog.getRacunDuznika());
@@ -68,8 +70,58 @@ public class NalogServiceBean implements NalogService {
             obradiNalog(nalog, dnevnoStanje);
         }catch (Exception e){
             odbijNalog(nalog);
-            throw new Exception("Duznik nema dovoljno sredstava na racunu!");
+            throw new Exception("Transakcija odbijena; duznik nema dovoljno sredstava na racunu.");
         }
+    }
+
+    @Override
+    public void izvrsiInterniPrenosIliNaplatu(Nalog nalog) throws Exception {
+        if(!racunService.provjeriAktivnostRacuna(nalog.getRacunPoverioca())){
+            odbijNalog(nalog);
+            throw new Exception("Transakcija odbijena; racun poverioca je ugasen.");
+        }
+        if(!racunService.provjeriAktivnostRacuna(nalog.getRacunDuznika())){
+            odbijNalog(nalog);
+            throw new Exception("Transakcija odbijena; racun duznika je ugasen.");
+        }
+        try{
+            DnevnoStanje poslednjeDnevnoStanje = dnevnoStanjeService.pronadjiPoslednjeDnevnoStanje(nalog.getRacunDuznika());
+            if(poslednjeDnevnoStanje.getNovoStanje() < nalog.getIznos())
+                throw new Exception();
+
+            DnevnoStanje dnevnoStanjeDuznika = dnevnoStanjeService.kreirajDnevnoStanjeDuznika(nalog, poslednjeDnevnoStanje);
+            obradiNalog(nalog, dnevnoStanjeDuznika);
+
+            DnevnoStanje dnevnoStanjePoverioca = dnevnoStanjeService.kreirajDnevnoStanjePoverica(nalog);
+            kreirajNalogZaPoverioca(nalog, dnevnoStanjePoverioca);
+        }catch (Exception e){
+            odbijNalog(nalog);
+            throw new Exception("Transakcija odbijena; duznik nema dovoljno sredstava na racunu.");
+        }
+    }
+
+    @Override
+    public void kreirajNalogZaPoverioca(Nalog nalog, DnevnoStanje dnevnoStanjePoverioca) {
+        Nalog noviNalog = new Nalog();
+        noviNalog.setIznos(nalog.getIznos());
+        noviNalog.setDuznik(nalog.getDuznik());
+        noviNalog.setPoverilac(nalog.getPoverilac());
+        noviNalog.setRacunDuznika(nalog.getRacunDuznika());
+        noviNalog.setRacunPoverioca(nalog.getRacunPoverioca());
+        noviNalog.setHitno(nalog.getHitno());
+        noviNalog.setModelZaduzenje(nalog.getModelZaduzenje());
+        noviNalog.setPozivNaBrojZaduzenje(nalog.getPozivNaBrojZaduzenje());
+        noviNalog.setModelOdobrenje(nalog.getModelOdobrenje());
+        noviNalog.setPozivNaBrojOdobrenje(nalog.getPozivNaBrojOdobrenje());
+        noviNalog.setSvrhaPlacanja(nalog.getSvrhaPlacanja());
+        noviNalog.setDatumPlacanja(nalog.getDatumPlacanja());
+        noviNalog.setDatumValute(nalog.getDatumValute());
+        noviNalog.setVrstaNaloga(nalog.getVrstaNaloga());
+        noviNalog.setSifraPlacanja(nalog.getSifraPlacanja());
+        noviNalog.setSifraValute(nalog.getSifraValute());
+        noviNalog.setStatusNaloga(StatusNaloga.OBRADJEN);
+        noviNalog.setDnevnoStanje(dnevnoStanjePoverioca);
+        dataManager.commit(noviNalog);
     }
 
 }
