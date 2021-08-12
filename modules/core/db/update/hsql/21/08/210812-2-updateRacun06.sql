@@ -1,0 +1,1 @@
+create unique index IDX_BANK_RACUN_UNIQ_BROJ_RACUNA on BANK_RACUN (BROJ_RACUNA);

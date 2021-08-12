@@ -1,0 +1,1 @@
+create unique index IDX_BANK_BANKA_UNIQ_SWIFT_KOD on BANK_BANKA (SWIFT_KOD);

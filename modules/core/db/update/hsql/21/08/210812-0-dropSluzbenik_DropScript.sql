@@ -1,0 +1,1 @@
+drop table BANK_SLUZBENIK__U99977 if exists cascade ;
