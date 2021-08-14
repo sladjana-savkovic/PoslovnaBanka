@@ -15,6 +15,7 @@ public class Nalog extends StandardEntity {
     private String vrstaNaloga;
 
     @Column(name = "DUZNIK")
+    @NotNull(message = "Unos duznika je obavezan!")
     private String duznik;
 
     @Column(name = "SVRHA_PLACANJA")
@@ -22,6 +23,7 @@ public class Nalog extends StandardEntity {
     private String svrhaPlacanja;
 
     @Column(name = "POVERILAC")
+    @NotNull(message = "Unos poverioca je obavezan!")
     private String poverilac;
 
     @Column(name = "SIFRA_PLACANJA", length = 3)

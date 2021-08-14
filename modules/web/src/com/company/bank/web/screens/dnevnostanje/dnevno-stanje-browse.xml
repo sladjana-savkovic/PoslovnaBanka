@@ -29,9 +29,6 @@
         <groupTable id="dnevnoStanjesTable"
                     width="100%"
                     dataContainer="dnevnoStanjesDc">
-            <actions>
-                <action id="remove" type="remove"/>
-            </actions>
             <columns>
                 <column id="racun"/>
                 <column id="datumPrometa"/>
@@ -41,10 +38,6 @@
                 <column id="novoStanje"/>
             </columns>
             <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="removeBtn" action="dnevnoStanjesTable.remove"/>
-            </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>

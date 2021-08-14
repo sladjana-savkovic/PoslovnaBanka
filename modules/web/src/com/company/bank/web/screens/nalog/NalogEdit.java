@@ -35,6 +35,7 @@ public class NalogEdit extends StandardEditor<Nalog> {
         Nalog nalog = nalogDc.getItem();
 
         try{
+            validirajNalog(nalog);
             if(nalog.getVrstaNaloga() == VrstaNaloga.NAPLATA || nalog.getVrstaNaloga() == VrstaNaloga.PRENOS)
                 validirajNalogZaPrenosIliNaplatu(nalog);
             else if(nalog.getVrstaNaloga() == VrstaNaloga.UPLATA)
@@ -57,6 +58,36 @@ public class NalogEdit extends StandardEditor<Nalog> {
             screenBuilders.lookup(Nalog.class, this)
                     .withOpenMode(OpenMode.THIS_TAB)
                     .show();
+        }
+    }
+
+    public void validirajNalog(Nalog nalog) throws Exception{
+        if(nalog.getVrstaNaloga() == null){
+            throw new ValidationException("Odabir vrste naloga je obavezan!");
+        }
+        if(nalog.getDuznik() == null || nalog.getDuznik().isEmpty()){
+            throw new ValidationException("Unos duznika je obavezan!");
+        }
+        if(nalog.getSvrhaPlacanja() == null || nalog.getSvrhaPlacanja().isEmpty()){
+            throw new ValidationException("Unos svrhe placanja je obavezan!");
+        }
+        if(nalog.getPoverilac() == null || nalog.getPoverilac().isEmpty()){
+            throw new ValidationException("Unos poverioca je obavezan!");
+        }
+        if(nalog.getSifraPlacanja() == null || nalog.getSifraPlacanja().isEmpty()){
+            throw new ValidationException("Unos sifre placanja je obavezan!");
+        }
+        if(nalog.getSifraValute() == null || nalog.getSifraValute().isEmpty()){
+            throw new ValidationException("Unos sifre valute je obavezan!");
+        }
+        if(nalog.getIznos() == null){
+            throw new ValidationException("Unos iznosa je obavezan!");
+        }
+        if(nalog.getIznos() <= 0){
+            throw new ValidationException("Iznos mora biti pozitivan!");
+        }
+        if(nalog.getDatumPlacanja() == null){
+            throw new ValidationException("Unos datuma placanja je obavezan!");
         }
     }
 

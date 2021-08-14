@@ -32,8 +32,6 @@
                     dataContainer="racunsDc">
             <actions>
                 <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="banka"/>
@@ -49,8 +47,6 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="racunsTable.create"/>
-                <button id="editBtn" action="racunsTable.edit"/>
-                <button id="removeBtn" action="racunsTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

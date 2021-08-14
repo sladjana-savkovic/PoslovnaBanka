@@ -31,6 +31,7 @@ public class KlijentEdit extends StandardEditor<Klijent> {
         Klijent klijent = klijentDc.getItem();
 
         try{
+            validirajKlijenta(klijent);
             if(klijent.getVrstaKlijenta() == VrstaKlijenta.PRAVNO_LICE)
                 validirajPravnoLice(klijent);
 
@@ -48,6 +49,24 @@ public class KlijentEdit extends StandardEditor<Klijent> {
             screenBuilders.lookup(Klijent.class, this)
                     .withOpenMode(OpenMode.THIS_TAB)
                     .show();
+        }
+    }
+
+    public  void validirajKlijenta(Klijent klijent) throws Exception{
+        if(klijent.getIme() == null || klijent.getIme().isEmpty()){
+            throw new ValidationException("Unos imena je obavezan!");
+        }
+        if(klijent.getPrezime() == null || klijent.getPrezime().isEmpty()){
+            throw new ValidationException("Unos prezimena je obavezan!");
+        }
+        if(klijent.getJmbg() == null || klijent.getJmbg().isEmpty()){
+            throw new ValidationException("Unos JMBG-a je obavezan!");
+        }
+        if(klijent.getJmbg().length() != 13){
+            throw new ValidationException("JMBG treba da sadrzi 13 karaktera!");
+        }
+        if(klijent.getVrstaKlijenta() == null){
+            throw new ValidationException("Odabir vrste klijenta je obavezan!");
         }
     }
 

@@ -60,6 +60,9 @@ public class SluzbenikEdit extends StandardEditor<Sluzbenik> {
         if (sluzbenik.getJmbg() == null || sluzbenik.getJmbg().isEmpty()) {
             throw new ValidationException("Unos JMBG-a je obavezan!");
         }
+        if(sluzbenik.getJmbg().length() != 13){
+            throw new ValidationException("JMBG treba da sadrzi 13 karaktera!");
+        }
         if (sluzbenik.getBanka() == null) {
             throw new ValidationException("Odabir banke je obavezan!");
         }

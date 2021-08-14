@@ -29,8 +29,6 @@
                     dataContainer="nalogsDc">
             <actions>
                 <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="vrstaNaloga"/>
@@ -55,8 +53,6 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="nalogsTable.create"/>
-                <button id="editBtn" action="nalogsTable.edit"/>
-                <button id="removeBtn" action="nalogsTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
