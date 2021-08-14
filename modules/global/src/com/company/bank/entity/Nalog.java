@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 public class Nalog extends StandardEntity {
     private static final long serialVersionUID = 4273708743362616260L;
 
-    @NotNull(message = "Vrsta naloga je obavezna!")
     @Column(name = "VRSTA_NALOGA", nullable = false)
-    private Integer vrstaNaloga;
+    private String vrstaNaloga;
 
     @Column(name = "DUZNIK")
     private String duznik;

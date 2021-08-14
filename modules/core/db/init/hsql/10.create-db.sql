@@ -133,7 +133,7 @@ create table BANK_NALOG (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    VRSTA_NALOGA integer not null,
+    VRSTA_NALOGA varchar(50) not null,
     DUZNIK varchar(255),
     SVRHA_PLACANJA varchar(255),
     POVERILAC varchar(255),
@@ -198,24 +198,13 @@ create table BANK_PORUKA (
     primary key (ID)
 )^
 -- end BANK_PORUKA
--- begin BANK_SLUZBENIK
-create table BANK_SLUZBENIK (
-    ID varchar(36) not null,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    IME varchar(255) not null,
-    PREZIME varchar(255) not null,
-    JMBG varchar(13) not null,
-    TELEFON varchar(255),
-    EMAIL varchar(255) not null,
-    BANKA_ID varchar(36) not null,
-    --
-    primary key (ID)
-)^
--- end BANK_SLUZBENIK
+
+-- begin SEC_USER
+alter table SEC_USER add column IME varchar(255) ^
+alter table SEC_USER add column PREZIME varchar(255) ^
+alter table SEC_USER add column JMBG varchar(13) ^
+alter table SEC_USER add column TELEFON varchar(255) ^
+alter table SEC_USER add column BANKA_ID varchar(36) ^
+alter table SEC_USER add column DTYPE varchar(31) ^
+update SEC_USER set DTYPE = 'sec$User' where DTYPE is null ^
+-- end SEC_USER

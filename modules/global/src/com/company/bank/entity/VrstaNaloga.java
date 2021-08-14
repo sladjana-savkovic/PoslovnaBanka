@@ -5,25 +5,25 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum VrstaNaloga implements EnumClass<Integer> {
+public enum VrstaNaloga implements EnumClass<String> {
 
-    UPLATA(1),
-    ISPLATA(2),
-    PRENOS(3),
-    NAPLATA(4);
+    UPLATA("uplata"),
+    ISPLATA("isplata"),
+    PRENOS("prenos"),
+    NAPLATA("naplata");
 
-    private Integer id;
+    private String id;
 
-    VrstaNaloga(Integer value) {
+    VrstaNaloga(String value) {
         this.id = value;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @Nullable
-    public static VrstaNaloga fromId(Integer id) {
+    public static VrstaNaloga fromId(String id) {
         for (VrstaNaloga at : VrstaNaloga.values()) {
             if (at.getId().equals(id)) {
                 return at;

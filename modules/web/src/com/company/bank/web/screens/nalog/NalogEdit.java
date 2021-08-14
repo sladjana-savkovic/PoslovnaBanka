@@ -5,13 +5,13 @@ import com.company.bank.service.NalogService;
 import com.company.bank.service.RacunService;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.Screens;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.bank.entity.Nalog;
 
 import javax.inject.Inject;
+import javax.validation.ValidationException;
 
 @UiController("bank_Nalog.edit")
 @UiDescriptor("nalog-edit.xml")
@@ -49,6 +49,9 @@ public class NalogEdit extends StandardEditor<Nalog> {
                     .withOpenMode(OpenMode.THIS_TAB)
                     .show();
         }
+        catch (ValidationException ve){
+            notifications.create().withCaption(ve.getMessage()).show();
+        }
         catch (Exception e){
             notifications.create().withCaption(e.getMessage()).show();
             screenBuilders.lookup(Nalog.class, this)
@@ -66,40 +69,40 @@ public class NalogEdit extends StandardEditor<Nalog> {
         validirajPoveriocaIDuznika(nalog);
 
         if(nalog.getRacunPoverioca() == null || nalog.getRacunPoverioca().isEmpty()){
-            throw new Exception("Unos racuna poverioca je obavezan!");
+            throw new ValidationException("Unos racuna poverioca je obavezan!");
         }
         if(nalog.getModelOdobrenje() == null || nalog.getModelOdobrenje().isEmpty()){
-            throw new Exception("Unos modela odobrenje je obavezan!");
+            throw new ValidationException("Unos modela odobrenje je obavezan!");
         }
         if(nalog.getPozivNaBrojOdobrenje() == null || nalog.getPozivNaBrojOdobrenje().isEmpty()){
-            throw new Exception("Unos poziva na broj odobrenje je obavezan!");
+            throw new ValidationException("Unos poziva na broj odobrenje je obavezan!");
         }
         if(!racunService.provjeriIspravnostRacuna(nalog.getRacunPoverioca()))
-            throw new Exception("Uneseni racun poverioca ne postoji!");
+            throw new ValidationException("Uneseni racun poverioca ne postoji!");
     }
 
     public void validirajNalogZaIsplatu(Nalog nalog) throws Exception {
         validirajPoveriocaIDuznika(nalog);
 
         if(nalog.getRacunDuznika() == null || nalog.getRacunDuznika().isEmpty()){
-            throw new Exception("Unos racuna duznika je obavezan!");
+            throw new ValidationException("Unos racuna duznika je obavezan!");
         }
         if(nalog.getModelZaduzenje() == null || nalog.getModelZaduzenje().isEmpty()){
-            throw new Exception("Unos modela zaduzenje je obavezan!");
+            throw new ValidationException("Unos modela zaduzenje je obavezan!");
         }
         if(nalog.getPozivNaBrojZaduzenje() == null || nalog.getPozivNaBrojZaduzenje().isEmpty()){
-            throw new Exception("Unos poziva na broj zaduzenje je obavezan!");
+            throw new ValidationException("Unos poziva na broj zaduzenje je obavezan!");
         }
         if(!racunService.provjeriIspravnostRacuna(nalog.getRacunDuznika()))
-            throw new Exception("Uneseni racun duznika ne postoji!");
+            throw new ValidationException("Uneseni racun duznika ne postoji!");
     }
 
     public void validirajPoveriocaIDuznika(Nalog nalog) throws Exception{
         if(nalog.getDuznik() == null || nalog.getDuznik().isEmpty()){
-            throw new Exception("Unos duznika je obavezan!");
+            throw new ValidationException("Unos duznika je obavezan!");
         }
         if(nalog.getPoverilac() == null || nalog.getPoverilac().isEmpty()){
-            throw new Exception("Unos poverioca je obavezan!");
+            throw new ValidationException("Unos poverioca je obavezan!");
         }
     }
 

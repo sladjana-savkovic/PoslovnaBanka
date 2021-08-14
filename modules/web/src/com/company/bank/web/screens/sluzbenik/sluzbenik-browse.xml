@@ -6,8 +6,10 @@
         messagesPack="com.company.bank.web.screens.sluzbenik">
     <data readOnly="true">
         <collection id="sluzbeniksDc"
-                    class="com.company.bank.entity.Sluzbenik" > 
-            <view   extends="_local"><property name="banka" view="_minimal"/></view>
+                    class="com.company.bank.entity.Sluzbenik">
+            <view extends="_local">
+                <property name="banka" view="_minimal"/>
+            </view>
             <loader id="sluzbeniksDl">
                 <query>
                     <![CDATA[select e from bank_Sluzbenik e]]>
@@ -24,73 +26,33 @@
                 dataLoader="sluzbeniksDl">
             <properties include=".*"/>
         </filter>
-        
-<groupTable id="sluzbeniksTable"
-        width="100%"
-        dataContainer="sluzbeniksDc">
-    <actions>
-        <action id="create" type="create"/>
-    
-        <action id="edit" type="edit"/>
-    
-        <action id="remove" type="remove"/>
-    
-    </actions>
-    <columns>
-        <column  id="login"/>
-    
-        <column  id="name"/>
-    
-        <column  id="firstName"/>
-    
-        <column  id="lastName"/>
-    
-        <column  id="middleName"/>
-    
-        <column  id="position"/>
-    
-        <column  id="email"/>
-    
-        <column  id="language"/>
-    
-        <column  id="timeZone"/>
-    
-        <column  id="timeZoneAuto"/>
-    
-        <column  id="active"/>
-    
-        <column  id="changePasswordAtNextLogon"/>
-    
-        <column  id="groupNames"/>
-    
-        <column  id="ipMask"/>
-    
-        <column  id="ime"/>
-    
-        <column  id="prezime"/>
-    
-        <column  id="jmbg"/>
-    
-        <column  id="telefon"/>
-    
-        <column  id="banka"/>
-    
-    </columns>
-    <rowsCount/>
-    <buttonsPanel id="buttonsPanel"
-                  alwaysVisible="true">
-        
-            <button id="createBtn" action="sluzbeniksTable.create"/>                
-        
-            <button id="editBtn" action="sluzbeniksTable.edit"/>                
-        
-            <button id="removeBtn" action="sluzbeniksTable.remove"/>                
-        
-    </buttonsPanel>
-</groupTable>
+        <groupTable id="sluzbeniksTable"
+                    width="100%"
+                    dataContainer="sluzbeniksDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="ime"/>
+                <column id="prezime"/>
+                <column id="jmbg"/>
+                <column id="email"/>
+                <column id="telefon"/>
+                <column id="banka"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="sluzbeniksTable.create"/>
+                <button id="editBtn" action="sluzbeniksTable.edit"/>
+                <button id="removeBtn" action="sluzbeniksTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
         </hbox>
-    </layout>                
+    </layout>
 </window>

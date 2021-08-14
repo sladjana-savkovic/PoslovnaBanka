@@ -15,6 +15,9 @@
                 <entry key="bank_NalogService" value="com.company.bank.service.NalogService"/>
                 <entry key="bank_GasenjeRacunaService" value="com.company.bank.service.GasenjeRacunaService"/>
                 <entry key="bank_DnevnoStanjeService" value="com.company.bank.service.DnevnoStanjeService"/>
+                <entry key="bank_KlijentService" value="com.company.bank.service.KlijentService"/>
+                <entry key="bank_BankaService" value="com.company.bank.service.BankaService"/>
+                <entry key="bank_SluzbenikService" value="com.company.bank.service.SluzbenikService"/>
             </map>
         </property>
     </bean>
