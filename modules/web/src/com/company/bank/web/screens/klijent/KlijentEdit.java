@@ -32,6 +32,7 @@ public class KlijentEdit extends StandardEditor<Klijent> {
 
         try{
             validirajKlijenta(klijent);
+            provjeriJedinstvenostJmbg(klijent.getJmbg());
             if(klijent.getVrstaKlijenta() == VrstaKlijenta.PRAVNO_LICE)
                 validirajPravnoLice(klijent);
 
@@ -52,7 +53,7 @@ public class KlijentEdit extends StandardEditor<Klijent> {
         }
     }
 
-    public  void validirajKlijenta(Klijent klijent) throws Exception{
+    public  void validirajKlijenta(Klijent klijent) throws ValidationException{
         if(klijent.getIme() == null || klijent.getIme().isEmpty()){
             throw new ValidationException("Unos imena je obavezan!");
         }
@@ -70,7 +71,7 @@ public class KlijentEdit extends StandardEditor<Klijent> {
         }
     }
 
-    public void validirajPravnoLice(Klijent klijent) throws Exception {
+    public void validirajPravnoLice(Klijent klijent) throws ValidationException {
         if(klijent.getPib() == null || klijent.getPib().isEmpty()){
             throw new ValidationException("Unos PIB-a je obavezan!");
         }
@@ -83,5 +84,10 @@ public class KlijentEdit extends StandardEditor<Klijent> {
         if(klijent.getDelatnost() == null){
             throw new ValidationException("Unos delatnosti je obavezan!");
         }
+    }
+
+    public void provjeriJedinstvenostJmbg(String jmbg) throws ValidationException {
+        if(klijentService.provjeriJedinstvenostJmbg(jmbg))
+            throw new ValidationException("Vec postoji klijent sa unesenim JMBG-om!");
     }
 }

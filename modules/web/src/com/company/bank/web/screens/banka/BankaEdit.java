@@ -32,7 +32,6 @@ public class BankaEdit extends StandardEditor<Banka> {
         try{
             validirajBanku(bankaDc.getItem());
             provjeriDaLiJeBankaKreirana();
-            provjeriPodatkeOBanci(bankaDc.getItem());
             bankaService.kreirajBanku(bankaDc.getItem());
 
             getScreenData().loadAll();
@@ -76,12 +75,4 @@ public class BankaEdit extends StandardEditor<Banka> {
                     "obrisite trenutnu banku.");
     }
 
-    public void provjeriPodatkeOBanci(Banka banka) throws Exception{
-        if(bankaService.provjeriJedinstvenostSifreBanke(banka.getSifraBanke()))
-            throw new Exception("Sifra je vec bila unesena.");
-        if(bankaService.provjeriJedinstvenostSwiftKoda(banka.getSwiftKod()))
-            throw new Exception("Swift kod je vec bio unesen.");
-        if(bankaService.provjeriJedinstvenostObracunskogRacuna(banka.getObracunskiRacun()))
-            throw new Exception("Obracunski racun je vec bio unesen.");
-    }
 }

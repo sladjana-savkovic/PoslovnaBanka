@@ -6,4 +6,5 @@ public interface KlijentService {
     String NAME = "bank_KlijentService";
 
     void kreirajKlijenta(Klijent klijent);
+    boolean provjeriJedinstvenostJmbg(String jmbg);
 }

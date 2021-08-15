@@ -7,7 +7,4 @@ public interface BankaService {
 
     void kreirajBanku(Banka banka);
     boolean provjeriDaLiJeBankaKreirana();
-    boolean provjeriJedinstvenostSifreBanke(String sifraBanke);
-    boolean provjeriJedinstvenostSwiftKoda(String swiftKod);
-    boolean provjeriJedinstvenostObracunskogRacuna(String obracunskiRacun);
 }
